@@ -91,7 +91,7 @@ void lua_pushObject(lua_State * L, id object) {
 
 id lua_toObject(lua_State * L, int idx) {
 
-    CFTypeRef *p = (CFTypeRef *) lua_touserdata(L, -1);
+    CFTypeRef *p = (CFTypeRef *) lua_touserdata(L, idx);
     
     if(p != nil) {
         return (__bridge id)(* p);
@@ -112,12 +112,13 @@ BOOL lua_isObject(lua_State * L, int idx) {
         if(lua_istable(L, -1)) {
             
             lua_pushstring(L, "__gc");
+            lua_rawget(L, -2);
             
             if(lua_iscfunction(L, -1)) {
                 r = lua_tocfunction(L, -1) == KKLuaObjectGcFunction;
             }
             
-            lua_pop(L, -1);
+            lua_pop(L, 1);
             
         }
         
