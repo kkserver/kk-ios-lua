@@ -37,9 +37,7 @@ static int KKLuaObjectIndexFunction(lua_State * L) {
         
         if(p != nil) {
             const char * name = lua_tostring(L, - top + 1);
-            id v = [(__bridge id) * p KKLuaObjectValueForKey:[NSString stringWithCString:name encoding:NSUTF8StringEncoding]];
-            lua_pushValue(L, v);
-            return 1;
+            return [(__bridge id) * p KKLuaObjectGet:[NSString stringWithCString:name encoding:NSUTF8StringEncoding] L:L];
         }
     }
     
@@ -56,8 +54,7 @@ static int KKLuaObjectNewIndexFunction(lua_State * L) {
         
         if(p != nil) {
             const char * name = lua_tostring(L, - top + 1);
-            id v = top > 2 ? lua_toValue(L, -top +2) : nil;
-            [(__bridge id) * p KKLuaObjectValue:v forKey:[NSString stringWithCString:name encoding:NSUTF8StringEncoding]];
+            return [(__bridge id) * p KKLuaObjectSet:[NSString stringWithCString:name encoding:NSUTF8StringEncoding] L:L];
         }
     }
     
@@ -212,6 +209,7 @@ id lua_toValue(lua_State * L, int idx) {
 
 @implementation NSObject(KKLuaObject)
 
+
 -(id) KKLuaObjectValueForKey:(NSString *) key {
     @try {
         return [self valueForKey:key];
@@ -223,17 +221,31 @@ id lua_toValue(lua_State * L, int idx) {
 
 -(void) KKLuaObjectValue:(id) value forKey:(NSString *) key {
     @try {
-        return [self setValue:value forKey:key];
+        [self setValue:value forKey:key];
     }
-    @catch(NSException * e) {
-    }
+    @catch(NSException * e){}
+}
+
+-(int) KKLuaObjectGet:(NSString *) key L:(lua_State *)L {
+    id v = [self KKLuaObjectValueForKey:key];
+    lua_pushValue(L, v);
+    return 1;
+}
+
+-(int) KKLuaObjectSet:(NSString *) key L:(lua_State *)L {
+    
+    id v = lua_toValue(L, -1);
+    
+    [self KKLuaObjectValue:v forKey:key];
+    
+    return 0;
 }
 
 @end
 
 @implementation NSArray(KKLuaObject)
 
--(id) KKLuaObjectValueForKey:(NSString *) key {
+-(id) KKLuaObjectValueForKey:(NSString *) key{
     
     if([key isEqualToString:@"@last"]) {
         return [self lastObject];
@@ -256,7 +268,7 @@ id lua_toValue(lua_State * L, int idx) {
     return nil;
 }
 
--(void) KKLuaObjectValue:(id) value forKey:(NSString *) key {
+-(void) KKLuaObjectValue:(id) value forKey:(NSString *) key{
     
 }
 
@@ -264,7 +276,7 @@ id lua_toValue(lua_State * L, int idx) {
 
 @implementation NSMutableArray(KKLuaObject)
 
--(void) KKLuaObjectValue:(id) value forKey:(NSString *) key {
+-(void) KKLuaObjectValue:(id) value forKey:(NSString *) key{
     int i = [key intValue];
     
     if(i >=0 && i< [self count]) {

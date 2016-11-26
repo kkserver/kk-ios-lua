@@ -21,6 +21,10 @@ BOOL lua_isObject(lua_State * L, int idx);
 
 @interface NSObject (KKLuaObject)
 
+-(int) KKLuaObjectGet:(NSString *) key L:(lua_State *)L;
+
+-(int) KKLuaObjectSet:(NSString *) key L:(lua_State *)L;
+
 -(id) KKLuaObjectValueForKey:(NSString *) key;
 
 -(void) KKLuaObjectValue:(id) value forKey:(NSString *) key;
