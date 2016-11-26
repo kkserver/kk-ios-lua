@@ -288,3 +288,44 @@ id lua_toValue(lua_State * L, int idx) {
 }
 
 @end
+
+
+@interface KKLuaRef() {
+    int _ref;
+}
+
+@end
+
+@implementation KKLuaRef
+
+-(instancetype) initWithL:(lua_State *) L {
+    if((self = [super init])) {
+        _L = L;
+        _ref = luaL_ref(L, LUA_REGISTRYINDEX);
+    }
+    return self;
+}
+
+-(void) dealloc {
+    
+    [self unref];
+    
+}
+
+-(void) unref {
+    if(_ref != 0) {
+        luaL_unref(_L, LUA_REGISTRYINDEX, _ref);
+        _ref = 0;
+    }
+}
+
+-(void) get {
+    if(_ref == 0) {
+        lua_pushnil(_L);
+    }
+    else {
+        lua_rawgeti(_L, LUA_REGISTRYINDEX, _ref);
+    }
+}
+
+@end

@@ -30,3 +30,15 @@ BOOL lua_isObject(lua_State * L, int idx);
 -(void) KKLuaObjectValue:(id) value forKey:(NSString *) key;
 
 @end
+
+@interface KKLuaRef : NSObject
+
+@property(nonatomic,assign,readonly) lua_State * L;
+
+-(instancetype) initWithL:(lua_State *) L;
+
+-(void) unref;
+
+-(void) get;
+
+@end

@@ -69,7 +69,6 @@
 		ACCDE3BA1DE93EB400E6C255 /* lvm.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE37C1DE93EB400E6C255 /* lvm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACCDE3BB1DE93EB400E6C255 /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE37D1DE93EB400E6C255 /* lzio.c */; };
 		ACCDE3BC1DE93EB400E6C255 /* lzio.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE37E1DE93EB400E6C255 /* lzio.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ACCDE3BD1DE93EB400E6C255 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE37F1DE93EB400E6C255 /* Makefile */; };
 		ACCDE3C01DE93FB200E6C255 /* KKLuaObject.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE3BE1DE93FB200E6C255 /* KKLuaObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACCDE3C11DE93FB200E6C255 /* KKLuaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE3BF1DE93FB200E6C255 /* KKLuaObject.m */; };
 /* End PBXBuildFile section */
@@ -367,7 +366,6 @@
 				ACCDE3C11DE93FB200E6C255 /* KKLuaObject.m in Sources */,
 				ACCDE3891DE93EB400E6C255 /* lctype.c in Sources */,
 				ACCDE3B61DE93EB400E6C255 /* lundump.c in Sources */,
-				ACCDE3BD1DE93EB400E6C255 /* Makefile in Sources */,
 				ACCDE3851DE93EB400E6C255 /* lbitlib.c in Sources */,
 				ACCDE3B81DE93EB400E6C255 /* lutf8lib.c in Sources */,
 				ACCDE3931DE93EB400E6C255 /* lgc.c in Sources */,
@@ -558,6 +556,7 @@
 				ACCDE3401DE93E7800E6C255 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
