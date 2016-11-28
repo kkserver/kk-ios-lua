@@ -13,6 +13,7 @@
 #include <KKLua/lauxlib.h>
 
 #import <KKLua/KKLuaObject.h>
+#import <KKLua/KKLuaState.h>
 
 //! Project version number for KKLua.
 FOUNDATION_EXPORT double KKLuaVersionNumber;

@@ -71,6 +71,8 @@
 		ACCDE3BC1DE93EB400E6C255 /* lzio.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE37E1DE93EB400E6C255 /* lzio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACCDE3C01DE93FB200E6C255 /* KKLuaObject.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE3BE1DE93FB200E6C255 /* KKLuaObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACCDE3C11DE93FB200E6C255 /* KKLuaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE3BF1DE93FB200E6C255 /* KKLuaObject.m */; };
+		ACCDE5061DE9E00400E6C255 /* KKLuaState.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE5041DE9E00400E6C255 /* KKLuaState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ACCDE5071DE9E00400E6C255 /* KKLuaState.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE5051DE9E00400E6C255 /* KKLuaState.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +143,8 @@
 		ACCDE37F1DE93EB400E6C255 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		ACCDE3BE1DE93FB200E6C255 /* KKLuaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKLuaObject.h; sourceTree = "<group>"; };
 		ACCDE3BF1DE93FB200E6C255 /* KKLuaObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKLuaObject.m; sourceTree = "<group>"; };
+		ACCDE5041DE9E00400E6C255 /* KKLuaState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKLuaState.h; sourceTree = "<group>"; };
+		ACCDE5051DE9E00400E6C255 /* KKLuaState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKLuaState.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +182,8 @@
 				ACCDE3BE1DE93FB200E6C255 /* KKLuaObject.h */,
 				ACCDE3BF1DE93FB200E6C255 /* KKLuaObject.m */,
 				ACCDE33A1DE93E7800E6C255 /* Info.plist */,
+				ACCDE5041DE9E00400E6C255 /* KKLuaState.h */,
+				ACCDE5051DE9E00400E6C255 /* KKLuaState.m */,
 			);
 			path = KKLua;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 				ACCDE38A1DE93EB400E6C255 /* lctype.h in Headers */,
 				ACCDE3871DE93EB400E6C255 /* lcode.h in Headers */,
 				ACCDE3811DE93EB400E6C255 /* lapi.h in Headers */,
+				ACCDE5061DE9E00400E6C255 /* KKLuaState.h in Headers */,
 				ACCDE3BA1DE93EB400E6C255 /* lvm.h in Headers */,
 				ACCDE3AF1DE93EB400E6C255 /* ltm.h in Headers */,
 				ACCDE3A91DE93EB400E6C255 /* lstring.h in Headers */,
@@ -323,6 +330,7 @@
 					ACCDE3351DE93E7800E6C255 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = BQQ2Y9B27K;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -368,6 +376,7 @@
 				ACCDE3B61DE93EB400E6C255 /* lundump.c in Sources */,
 				ACCDE3851DE93EB400E6C255 /* lbitlib.c in Sources */,
 				ACCDE3B81DE93EB400E6C255 /* lutf8lib.c in Sources */,
+				ACCDE5071DE9E00400E6C255 /* KKLuaState.m in Sources */,
 				ACCDE3931DE93EB400E6C255 /* lgc.c in Sources */,
 				ACCDE39A1DE93EB400E6C255 /* lmathlib.c in Sources */,
 				ACCDE3A31DE93EB400E6C255 /* lparser.c in Sources */,
@@ -500,6 +509,7 @@
 		ACCDE33F1DE93E7800E6C255 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = BQQ2Y9B27K;
@@ -514,12 +524,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.kkserver.KKLua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		ACCDE3401DE93E7800E6C255 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = BQQ2Y9B27K;
@@ -534,6 +547,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.kkserver.KKLua;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

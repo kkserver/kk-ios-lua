@@ -42,3 +42,11 @@ BOOL lua_isObject(lua_State * L, int idx);
 -(void) get;
 
 @end
+
+@interface KKLuaWeakObject : NSObject
+
+@property(nonatomic,weak,readonly) id object;
+
+-(instancetype) initWithObject:(id) object;
+
+@end
