@@ -167,39 +167,57 @@ id lua_toValue(lua_State * L, int idx) {
         case LUA_TTABLE:
         
         {
-            NSMutableDictionary * object = nil;
-            NSMutableArray * array = nil;
+            NSMutableDictionary * object = [NSMutableDictionary dictionaryWithCapacity:4];
+            NSMutableArray * array = [NSMutableArray arrayWithCapacity:4];
+            
+            int i = 0;
+            int size = 0;
             
             lua_pushnil(L);
             
             while(lua_next(L, idx - 1)) {
                 
                 if(lua_type(L, -2) == LUA_TNUMBER) {
-                    if(array == nil) {
-                        array = [NSMutableArray arrayWithCapacity:4];
+                    if(lua_tointeger(L, -2) == i +1) {
+                        id v = lua_toValue(L, -1);
+                        i ++;
+                        [array addObject:v];
+                        [object setValue:v forKey:[NSString stringWithFormat:@"%d",i]];
+                    } else if(lua_isinteger(L, -2)) {
+                        id v = lua_toValue(L, -1);
+                        [object setValue:v forKey:[NSString stringWithFormat:@"%d",lua_tointeger(L, -2)]];
+                    } else {
+                        id v = lua_toValue(L, -1);
+                        [object setValue:v forKey:[NSString stringWithFormat:@"%f",lua_tonumber(L, -2)]];
                     }
-                    id v = lua_toValue(L, -1);
-                    [array addObject:v];
                 }
                 else if(lua_type(L,-2) == LUA_TSTRING){
-                    if(object == nil) {
-                        object = [NSMutableDictionary dictionaryWithCapacity:4];
+                    if(lua_isinteger(L, -2) && lua_tointeger(L, -2) == i +1) {
+                        id v = lua_toValue(L, -1);
+                        i ++ ;
+                        [array addObject:v];
+                        [object setValue:v forKey:[NSString stringWithFormat:@"%d",i]];
+                        
+                    } else {
+                        const char * key = lua_tostring(L, -2);
+                        id v = lua_toValue(L, -1);
+                        [object setValue:v forKey:[NSString stringWithCString:key encoding:NSUTF8StringEncoding]];
                     }
-                    const char * key = lua_tostring(L, -2);
-                    id v = lua_toValue(L, -1);
-                    [object setValue:v forKey:[NSString stringWithCString:key encoding:NSUTF8StringEncoding]];
                 }
                 
                 lua_pop(L, 1);
                 
+                size ++;
             }
             
-            if(object == nil && array == nil) {
-                return [NSMutableDictionary dictionaryWithCapacity:2];
+            if(size == 0) {
+                return object;
             }
-            else if(array != nil) {
+            
+            if(size == i) {
                 return array;
             }
+            
             return object;
         }
             
