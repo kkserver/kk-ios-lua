@@ -61,6 +61,22 @@ static int KKLuaObjectNewIndexFunction(lua_State * L) {
     return 0;
 }
 
+static int KKLuaObjectLenFunction(lua_State * L) {
+    
+    int top = lua_gettop(L);
+    
+    if(top > 0 && lua_isuserdata(L, - top) ) {
+        
+        CFTypeRef *p = (CFTypeRef *) lua_touserdata(L, -1);
+        
+        if(p != nil) {
+            return [(__bridge id) * p KKLuaObjectLenWithL:L];
+        }
+    }
+    
+    return 0;
+}
+
 void lua_pushObject(lua_State * L, id object) {
     
     if(object == nil) {
@@ -83,6 +99,10 @@ void lua_pushObject(lua_State * L, id object) {
     
     lua_pushstring(L, "__newindex");
     lua_pushcfunction(L, KKLuaObjectNewIndexFunction);
+    lua_rawset(L, -3);
+    
+    lua_pushstring(L, "__len");
+    lua_pushcfunction(L, KKLuaObjectLenFunction);
     lua_rawset(L, -3);
     
     lua_setmetatable(L, -2);
@@ -185,7 +205,7 @@ id lua_toValue(lua_State * L, int idx) {
                         [object setValue:v forKey:[NSString stringWithFormat:@"%d",i]];
                     } else if(lua_isinteger(L, -2)) {
                         id v = lua_toValue(L, -1);
-                        [object setValue:v forKey:[NSString stringWithFormat:@"%d",lua_tointeger(L, -2)]];
+                        [object setValue:v forKey:[NSString stringWithFormat:@"%lld",lua_tointeger(L, -2)]];
                     } else {
                         id v = lua_toValue(L, -1);
                         [object setValue:v forKey:[NSString stringWithFormat:@"%f",lua_tonumber(L, -2)]];
@@ -261,6 +281,12 @@ id lua_toValue(lua_State * L, int idx) {
     
     return 0;
 }
+    
+-(int) KKLuaObjectLenWithL:(lua_State *)L {
+    lua_pushinteger(L, 0);
+    return 1;
+}
+
 
 @end
 
@@ -282,11 +308,16 @@ id lua_toValue(lua_State * L, int idx) {
     
     int i = [key intValue];
     
-    if(i >=0 && i< [self count]) {
-        return [self objectAtIndex:i];
+    if(i >=1 && i<= [self count]) {
+        return [self objectAtIndex:i-1];
     }
     
     return nil;
+}
+    
+-(int) KKLuaObjectLenWithL:(lua_State *)L {
+    lua_pushinteger(L, [self count]);
+    return 1;
 }
 
 -(void) KKLuaObjectValue:(id) value forKey:(NSString *) key{
@@ -300,12 +331,21 @@ id lua_toValue(lua_State * L, int idx) {
 -(void) KKLuaObjectValue:(id) value forKey:(NSString *) key{
     int i = [key intValue];
     
-    if(i >=0 && i< [self count]) {
-        [self replaceObjectAtIndex:i withObject:value];
+    if(i >=1 && i<= [self count]) {
+        [self replaceObjectAtIndex:i-1 withObject:value];
     }
     else if(i == [self count]) {
         [self addObject:value];
     }
+}
+
+@end
+
+@implementation NSDictionary(KKLuaObject)
+    
+-(int) KKLuaObjectLenWithL:(lua_State *)L {
+    lua_pushinteger(L, [self count]);
+    return 1;
 }
 
 @end

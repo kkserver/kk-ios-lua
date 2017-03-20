@@ -11,6 +11,65 @@
 #include <KKLua/lauxlib.h>
 #import "KKLuaObject.h"
 
+static int kk_lua_log_function(struct lua_State * L) {
+    
+    int top = lua_gettop(L);
+    
+    printf("[KK]");
+    
+    for(int i=0;i<top;i++) {
+        
+        printf(" ");
+        
+        switch (lua_type(L, - top + i)) {
+        case LUA_TNUMBER:
+            if(lua_isinteger(L, -top + i)) {
+                printf("%lld",lua_tointeger(L, -top + i));
+            } else {
+                printf("%f",lua_tonumber(L, -top + i));
+            }
+            break;
+        case LUA_TBOOLEAN:
+            if(lua_isboolean(L, -top + i)) {
+                printf("true");
+            } else {
+                printf("false");
+            }
+            break;
+        case LUA_TSTRING:
+            printf("%s",lua_tostring(L, -top + i));
+            break;
+        case LUA_TUSERDATA:
+            {
+                id v = lua_toObject(L, -top +i );
+                if(v) {
+                    printf("%s",[[v description] UTF8String]);
+                } else {
+                    printf("nil");
+                }
+            }
+            break;
+        case LUA_TLIGHTUSERDATA:
+            printf("[lightuserdata]");
+            break;
+        case LUA_TFUNCTION:
+            printf("[function]");
+            break;
+        case LUA_TTABLE:
+            printf("[table]");
+            break;
+        default:
+            printf("nil");
+            break;
+        }
+        
+    }
+    
+    printf("\n");
+    
+    return 0;
+}
+
 @implementation KKLuaState
 
 -(id) init {
@@ -26,6 +85,10 @@
 
 -(void) openlibs {
     luaL_openlibs(_L);
+    
+    lua_pushcfunction(_L, kk_lua_log_function);
+    lua_setglobal(_L, "log");
+    
 }
 
 -(void) openlibFile:(NSString *) luaFile {

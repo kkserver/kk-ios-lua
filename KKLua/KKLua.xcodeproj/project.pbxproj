@@ -69,7 +69,7 @@
 		ACCDE3BB1DE93EB400E6C255 /* lzio.c in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE37D1DE93EB400E6C255 /* lzio.c */; };
 		ACCDE3BC1DE93EB400E6C255 /* lzio.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE37E1DE93EB400E6C255 /* lzio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACCDE3C01DE93FB200E6C255 /* KKLuaObject.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE3BE1DE93FB200E6C255 /* KKLuaObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ACCDE3C11DE93FB200E6C255 /* KKLuaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE3BF1DE93FB200E6C255 /* KKLuaObject.m */; };
+		ACCDE3C11DE93FB200E6C255 /* rf.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE3BF1DE93FB200E6C255 /* rf.m */; };
 		ACCDE5061DE9E00400E6C255 /* KKLuaState.h in Headers */ = {isa = PBXBuildFile; fileRef = ACCDE5041DE9E00400E6C255 /* KKLuaState.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ACCDE5071DE9E00400E6C255 /* KKLuaState.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCDE5051DE9E00400E6C255 /* KKLuaState.m */; };
 /* End PBXBuildFile section */
@@ -140,7 +140,7 @@
 		ACCDE37E1DE93EB400E6C255 /* lzio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lzio.h; sourceTree = "<group>"; };
 		ACCDE37F1DE93EB400E6C255 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		ACCDE3BE1DE93FB200E6C255 /* KKLuaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKLuaObject.h; sourceTree = "<group>"; };
-		ACCDE3BF1DE93FB200E6C255 /* KKLuaObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKLuaObject.m; sourceTree = "<group>"; };
+		ACCDE3BF1DE93FB200E6C255 /* rf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rf.m; sourceTree = "<group>"; };
 		ACCDE5041DE9E00400E6C255 /* KKLuaState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKLuaState.h; sourceTree = "<group>"; };
 		ACCDE5051DE9E00400E6C255 /* KKLuaState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKLuaState.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,7 +178,7 @@
 				ACCDE3411DE93EB400E6C255 /* src */,
 				ACCDE3391DE93E7800E6C255 /* KKLua.h */,
 				ACCDE3BE1DE93FB200E6C255 /* KKLuaObject.h */,
-				ACCDE3BF1DE93FB200E6C255 /* KKLuaObject.m */,
+				ACCDE3BF1DE93FB200E6C255 /* rf.m */,
 				ACCDE33A1DE93E7800E6C255 /* Info.plist */,
 				ACCDE5041DE9E00400E6C255 /* KKLuaState.h */,
 				ACCDE5051DE9E00400E6C255 /* KKLuaState.m */,
@@ -367,7 +367,7 @@
 				ACCDE3B91DE93EB400E6C255 /* lvm.c in Sources */,
 				ACCDE3AB1DE93EB400E6C255 /* ltable.c in Sources */,
 				ACCDE3911DE93EB400E6C255 /* lfunc.c in Sources */,
-				ACCDE3C11DE93FB200E6C255 /* KKLuaObject.m in Sources */,
+				ACCDE3C11DE93FB200E6C255 /* rf.m in Sources */,
 				ACCDE3891DE93EB400E6C255 /* lctype.c in Sources */,
 				ACCDE3B61DE93EB400E6C255 /* lundump.c in Sources */,
 				ACCDE3851DE93EB400E6C255 /* lbitlib.c in Sources */,
