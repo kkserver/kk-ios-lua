@@ -50,7 +50,7 @@ static int KKLuaObjectNewIndexFunction(lua_State * L) {
     
     if(top > 1 && lua_isuserdata(L, - top) && lua_isstring(L, - top + 1)) {
         
-        CFTypeRef *p = (CFTypeRef *) lua_touserdata(L, -1);
+        CFTypeRef *p = (CFTypeRef *) lua_touserdata(L, - top);
         
         if(p != nil) {
             const char * name = lua_tostring(L, - top + 1);
@@ -67,7 +67,7 @@ static int KKLuaObjectLenFunction(lua_State * L) {
     
     if(top > 0 && lua_isuserdata(L, - top) ) {
         
-        CFTypeRef *p = (CFTypeRef *) lua_touserdata(L, -1);
+        CFTypeRef *p = (CFTypeRef *) lua_touserdata(L, - top);
         
         if(p != nil) {
             return [(__bridge id) * p KKLuaObjectLenWithL:L];
