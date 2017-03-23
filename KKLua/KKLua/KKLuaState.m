@@ -158,4 +158,8 @@ static int kk_lua_log_function(struct lua_State * L) {
     }
 }
 
+-(void) gc {
+    lua_gc(_L, LUA_GCCOLLECT, 0);
+}
+
 @end

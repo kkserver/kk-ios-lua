@@ -13,6 +13,8 @@
 
 @property(nonatomic,readonly,assign) lua_State * L;
 
+-(void) gc;
+
 -(void) openlibs;
 
 -(void) openlibs:(NSString *) path;
