@@ -332,7 +332,11 @@ id lua_toValue(lua_State * L, int idx) {
     int i = [key intValue];
     
     if(i >=1 && i<= [self count]) {
-        [self replaceObjectAtIndex:i-1 withObject:value];
+        if(value == nil ) {
+            [self removeObjectAtIndex:i -1];
+        } else {
+            [self replaceObjectAtIndex:i-1 withObject:value];
+        }
     }
     else if(i == [self count]) {
         [self addObject:value];
