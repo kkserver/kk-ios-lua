@@ -156,6 +156,9 @@ void lua_pushValue(lua_State * L, id value) {
         if(strcmp([value objCType] ,@encode(BOOL)) == 0) {
             lua_pushboolean(L, [value boolValue]);
         }
+        else if((double) [value longLongValue] == [value doubleValue]) {
+            lua_pushinteger(L, [value longLongValue]);
+        }
         else {
             lua_pushnumber(L, [value doubleValue]);
         }
@@ -174,6 +177,9 @@ id lua_toValue(lua_State * L, int idx) {
     
     switch (type) {
         case LUA_TNUMBER:
+            if(lua_isinteger(L, idx)) {
+                return [NSNumber numberWithLongLong:lua_tointeger(L, idx)];
+            }
             return [NSNumber numberWithDouble:lua_tonumber(L, idx)];
         case LUA_TBOOLEAN:
             return [NSNumber numberWithBool:lua_toboolean(L, idx)];
